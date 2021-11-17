@@ -8,12 +8,12 @@
 	<managed-bean>
 		<managed-bean-name>browseQuestions</managed-bean-name>
 		<managed-bean-class>eredua.bean.BrowseQuestions</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>createQuestion</managed-bean-name>
 		<managed-bean-class>eredua.bean.CreateQuestion</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
 </faces-config>

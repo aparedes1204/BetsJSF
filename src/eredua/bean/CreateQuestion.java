@@ -102,6 +102,8 @@ public class CreateQuestion {
 		}
 		try {
 		facadeBL.createQuestion(selectedEvent, question, betMin);
+		FacesContext.getCurrentInstance().addMessage(null,
+				 new FacesMessage("Question created successfully. "));
 		return "ok";
 		} catch (QuestionAlreadyExist e) {
 			FacesContext.getCurrentInstance().addMessage(null,
