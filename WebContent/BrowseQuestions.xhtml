@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>Bets - Browse Questions</title>
+		<h:outputStylesheet library="css" name="style.css" />
+	</h:head>
+	<h:body>
+
+		<h:form>
+			<h3>Browse Questions</h3>
+
+			<h4>Event date</h4>
+			<p:calendar id="data" navigator="true" mode="inline"
+				onselect="showEvents()">
+				<p:ajax event="dateSelect"
+					listener="#{browseQuestions.onDateSelect}"
+					update="@(.eventTable, .questionTable)"></p:ajax>
+			</p:calendar>
+
+			<h4>Events on selected date</h4>
+			<p:dataTable styleClass="eventTable" value="#{browseQuestions.events}"
+				var="event" selectionMode="single"
+				selection="#{browseQuestions.selectedEvent}" border="1"
+				rowKey="#{event.eventNumber}">
+				<p:ajax event="rowSelect"
+					listener="#{browseQuestions.onEventSelect}" update="@(.questionTable)"></p:ajax>
+				<f:facet name="header">Events:</f:facet>
+				<p:column headerText="Event Number">#{event.eventNumber}</p:column>
+				<p:column headerText="Event">#{event.description}</p:column>
+			</p:dataTable>
+
+			<h4>Questions of selected event</h4>
+			<p:dataTable styleClass="questionTable" value="#{browseQuestions.questions}"
+				var="question" border="1"
+				rowKey="#{event.eventNumber}">
+				<f:facet name="header">Questions:</f:facet>
+				<p:column headerText="Question Number">#{question.questionNumber}</p:column>
+				<p:column headerText="Question">#{question.question}</p:column>
+			</p:dataTable>
+			
+			<p><h:button value="Back" outcome="Hasiera.xhtml" /></p>
+		</h:form>
+	</h:body>
+</f:view>
+</html>
