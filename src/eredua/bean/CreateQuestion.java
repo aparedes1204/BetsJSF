@@ -27,7 +27,7 @@ public class CreateQuestion {
 	
 	
 	public CreateQuestion() {
-		facadeBL = new BLFacadeImplementation(new DataAccess());
+		facadeBL = FacadeBean.getBusinessLogic();
 	}
 	
 	public BLFacade getFacadeBL() {
@@ -115,4 +115,18 @@ public class CreateQuestion {
 			return "error";
 		}
 	}
+	public void reset() {
+		this.eventDate = null;
+		this.events = null;
+		this.question = null;
+		this.selectedEvent = null;
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("Hasiera.xhtml");
+		    FacesContext.getCurrentInstance().responseComplete();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

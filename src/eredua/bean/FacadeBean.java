@@ -2,6 +2,7 @@ package eredua.bean;
 
 import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
+import dataAccess.DataAccess;
 
 public class FacadeBean {
 
@@ -11,7 +12,7 @@ public class FacadeBean {
 	
 	private FacadeBean() {
 		try {
-			facadeInterface = new BLFacadeImplementation();
+			facadeInterface = new BLFacadeImplementation(new DataAccess());
 		} catch (Exception e) {
 			System.out.println("FacadeBean: negozioaren logika sortzearen errorea: "+e.getMessage());
 		}

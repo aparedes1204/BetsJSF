@@ -16,7 +16,7 @@
 			<h3>Create Questions</h3>
 
 			<h4>Event date</h4>
-			<p:calendar id="data" navigator="true" mode="inline">
+			<p:calendar id="data" navigator="true" mode="inline" value="#{createQuestion.eventDate}">
 				<p:ajax event="dateSelect" listener="#{createQuestion.onDateSelect}"
 					update="@(.eventTable)"></p:ajax>
 			</p:calendar>
@@ -42,8 +42,8 @@
 			</p>
 			<h:commandButton value="Create Question"
 				action="#{createQuestion.createQuestion}" />
-			<h:messages style="color:red" />
-			<p><h:button value="Back" outcome="Hasiera.xhtml" /></p>
+			<h:messages style="color:red"/>
+			<p><h:commandButton value="Back" action="#{createQuestion.reset}" /></p>
 		</h:form>
 	</h:body>
 </f:view>

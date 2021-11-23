@@ -24,7 +24,7 @@ public class BrowseQuestions {
 	private List<Question> questions;
 
 	public BrowseQuestions() {
-		facadeBL = new BLFacadeImplementation(new DataAccess());
+		facadeBL = FacadeBean.getBusinessLogic();
 	}
 
 	public Date getEventDate() {
@@ -66,8 +66,23 @@ public class BrowseQuestions {
 	}
 	
 	public void onEventSelect(SelectEvent event) {
+		System.out.println((Event) event.getObject());
 		this.selectedEvent = (Event) event.getObject();
 		this.questions = selectedEvent.getQuestions();
+	}
+	
+	public void reset() {
+		this.eventDate = null;
+		this.events = null;
+		this.questions = null;
+		this.selectedEvent = null;
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("Hasiera.xhtml");
+		    FacesContext.getCurrentInstance().responseComplete();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

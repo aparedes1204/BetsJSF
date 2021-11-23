@@ -17,7 +17,7 @@
 
 			<h4>Event date</h4>
 			<p:calendar id="data" navigator="true" mode="inline"
-				onselect="showEvents()">
+				onselect="showEvents()" value="#{browseQuestions.eventDate}">
 				<p:ajax event="dateSelect"
 					listener="#{browseQuestions.onDateSelect}"
 					update="@(.eventTable, .questionTable)"></p:ajax>
@@ -44,7 +44,7 @@
 				<p:column headerText="Question">#{question.question}</p:column>
 			</p:dataTable>
 			
-			<p><h:button value="Back" outcome="Hasiera.xhtml" /></p>
+			<p><h:commandButton value="Back" action="#{browseQuestion.reset}"/></p>
 		</h:form>
 	</h:body>
 </f:view>
