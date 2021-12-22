@@ -118,8 +118,9 @@ public class CreateQuestion {
 	public void reset() {
 		this.eventDate = null;
 		this.events = null;
-		this.question = null;
+		this.question = "";
 		this.selectedEvent = null;
+		this.betMin = 0;
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("Hasiera.xhtml");
 		    FacesContext.getCurrentInstance().responseComplete();

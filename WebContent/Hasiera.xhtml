@@ -6,18 +6,28 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <f:view>
 	<h:head>
-		<title>JavaServer Faces aplikazioa</title>
+		<title>Bets</title>
 	</h:head>
 	<h:body>
 		<h:form>
-			<h3>Ongi etorri Bets-era,</h3>
+			<h3>Ongi etorri Bets-era, #{authentication.izena}</h3>
 			<p>
-				<h:button value="Create Question" outcome="CreateQuestion.xhtml" />
+				<h:button rendered = "#{authentication.izena == 'admin'}" value="Create Question" outcome="CreateQuestion.xhtml" />
 			</p>
 			<p>
-				<h:button value="Browse Questions" outcome="BrowseQuestions.xhtml" />
+				<h:button rendered = "#{authentication.izena == null}" value="Browse Questions" outcome="BrowseQuestions.xhtml" />
+				<h:button rendered ="#{authentication.izena != null}" value="Make a bet" outcome="MakeBet.xhtml" />
 			</p>
-
+			<p>
+				<h:button value="Show Events" outcome="EventDate.xhtml" />
+			</p>
+			<p>
+				<h:button  rendered = "#{authentication.izena == null}" value="Log in" outcome="Login.xhtml" />
+				<h:commandButton  rendered = "#{authentication.izena != null}" value="Log out" action="#{authentication.logout}" />
+			</p>
+			<p>
+				<h:button  rendered = "#{authentication.izena == null}" value="Sign up" outcome="Signup.xhtml" />
+			</p>
 			<h:messages id="erroreak" style="color:red"/>
 
 		</h:form>

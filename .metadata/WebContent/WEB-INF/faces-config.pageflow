@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16371694943790" configfile="/BetsJSF/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16371694943790" configfile="/BetsJSF/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Login.xhtml" x="179" y="474" id="pf16395046054800" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf16395046054801" path="/Login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Hasiera.xhtml" x="372" y="280" id="pf16395046054812" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf16395046054801 pf16395289692290" path="/Hasiera.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Signup.xhtml" x="623" y="500" id="pf16395289692301" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf16395289692290" path="/Signup.xhtml"/>
+  <links id="pf16395046054801" target="pf16395046054812" source="pf16395046054800" outcome="ok"/>
+  <links id="pf16395289692290" target="pf16395046054812" source="pf16395289692301" outcome="ok"/>
+</pageflow:Pageflow>

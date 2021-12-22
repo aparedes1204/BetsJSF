@@ -7,13 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 <f:view>
 	<h:head>
-		<title>Bets - Browse Questions</title>
+		<title>Bets - Make a bet</title>
 		<h:outputStylesheet library="css" name="style.css" />
 	</h:head>
 	<h:body>
 
-		<h:form>
-			<h3>Browse Questions</h3>
+		<h:form id="form">
+			<h3>Make a bet</h3>
 
 			<h4>Event date</h4>
 			<p:calendar id="data" navigator="true" mode="inline"
@@ -37,17 +37,26 @@
 
 			<h4>Questions of selected event</h4>
 			<p:dataTable styleClass="questionTable" value="#{browseQuestions.questions}"
-				var="question" border="1"
-				rowKey="#{event.eventNumber}">
+				var="question" selectionMode="single" selection="#{browseQuestions.selectedQuestion}" border="1"
+				rowKey="#{question.questionNumber}">
 				<p:ajax event="rowSelect"
-					listener="#{browseQuestions.onQuestionSelect}" update="@(.questionTable)"></p:ajax>
+					listener="#{browseQuestions.onQuestionSelect}" update=":form:bet"></p:ajax>
 				<f:facet name="header">Questions:</f:facet>
 				<p:column headerText="Question Number">#{question.questionNumber}</p:column>
 				<p:column headerText="Question">#{question.question}</p:column>
 			</p:dataTable>
-
+					<p>
+				Answer:
+				<h:inputText id="answer" value="#{browseQuestions.answer}" />
+			</p>
+			<p>
+				<h:outputText id="bet" value="Bet: (Minimum bet: #{browseQuestions.selectedQuestion.betMinimum}€)"/>
+	
+				<h:inputText id="betamount" value="#{browseQuestions.bet}" />
+			</p>
+			<h:commandButton value="Make Bet"
+				action="#{browseQuestions.makeBet(authentication.izena)}" />
 			<h:messages style="color:red"/>
-			
 			<p><h:commandButton value="Back" action="#{browseQuestions.reset}"/></p>
 		</h:form>
 	</h:body>

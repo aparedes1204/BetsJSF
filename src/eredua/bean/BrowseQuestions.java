@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
@@ -22,6 +23,33 @@ public class BrowseQuestions {
 	private List<Event> events;
 	private Event selectedEvent;
 	private List<Question> questions;
+	private Question selectedQuestion;
+	private String answer;
+	private float bet;
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public float getBet() {
+		return bet;
+	}
+
+	public void setBet(float bet) {
+		this.bet = bet;
+	}
+
+	public Question getSelectedQuestion() {
+		return selectedQuestion;
+	}
+
+	public void setSelectedQuestion(Question selectedQuestion) {
+		this.selectedQuestion = selectedQuestion;
+	}
 
 	public BrowseQuestions() {
 		facadeBL = FacadeBean.getBusinessLogic();
@@ -71,11 +99,47 @@ public class BrowseQuestions {
 		this.questions = selectedEvent.getQuestions();
 	}
 	
+	public void onQuestionSelect(SelectEvent event) {
+		this.selectedQuestion = (Question) event.getObject();
+	}
+	
+	public String makeBet(String username) {
+		if(this.selectedQuestion == null) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					 new FacesMessage("Please pick a question"));
+			return "error";
+		}
+		if(this.answer == "") {
+			FacesContext.getCurrentInstance().addMessage(null,
+					 new FacesMessage("Please write an answer"));
+			return "error";
+		}
+		if(this.bet < this.selectedQuestion.getBetMinimum()) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					 new FacesMessage("You have to bet more than the minimum bet"));
+			return "error";
+		} else {
+			boolean valid = facadeBL.makeBet(selectedQuestion, answer, bet, username);
+			if(valid) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage("Bet successfuly created"));
+				return "ok";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage("You have already betted to this question"));
+				return "error";
+			}
+		}
+	}
+	
 	public void reset() {
 		this.eventDate = null;
 		this.events = null;
 		this.questions = null;
 		this.selectedEvent = null;
+		this.answer = "";
+		this.bet = 0;
+		this.selectedQuestion = null;
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("Hasiera.xhtml");
 		    FacesContext.getCurrentInstance().responseComplete();
